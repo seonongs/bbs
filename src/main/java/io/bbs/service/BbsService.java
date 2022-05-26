@@ -50,4 +50,8 @@ public class BbsService {
         bbsRepository.delete(bbs);
         return bbs;
     }
+
+    public Page<BbsEntity> findByTitleContains(String keyword, Pageable pageable) {
+        return bbsRepository.findByTitleContains(keyword, pageable);
+    }
 }

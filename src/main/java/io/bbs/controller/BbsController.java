@@ -24,17 +24,14 @@ public class BbsController {
     public BbsEntity create(@Valid @RequestBody BbsEntity bbs) {
         return bbsService.create(bbs);
     }
-
-    @GetMapping
+    @GetMapping("")
     public Page<BbsEntity> readAll(@PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
         return bbsService.read(pageable);
     }
-
     @GetMapping("/{id}")
     public Optional<BbsEntity> read(@PathVariable(value = "id") Long id) {
         return bbsService.findById(id);
     }
-
     @PatchMapping("/{id}")
     public BbsResult update(@PathVariable(value = "id") Long id, @Valid @RequestBody BbsResult bbsResult) {
         return bbsService.update(id, bbsResult);
@@ -42,6 +39,10 @@ public class BbsController {
     @DeleteMapping("/{id}")
     public BbsEntity delete (@PathVariable(value = "id") Long id) {
         return bbsService.delete(id);
+    }
+    @GetMapping("/search")
+    public Page<BbsEntity> findByTitleContains(String keyword, Pageable pageable) {
+        return bbsService.findByTitleContains(keyword, pageable);
     }
 
 }
