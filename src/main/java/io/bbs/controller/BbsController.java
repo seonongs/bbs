@@ -25,8 +25,8 @@ public class BbsController {
         return bbsService.create(bbs);
     }
     @GetMapping("")
-    public Page<BbsEntity> readAll(@PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
-        return bbsService.read(pageable);
+    public Page<BbsEntity> findByTitleContains(String keyword, Pageable pageable) {
+        return bbsService.findByTitleContains(keyword, pageable);
     }
     @GetMapping("/{id}")
     public Optional<BbsEntity> read(@PathVariable(value = "id") Long id) {
@@ -39,10 +39,6 @@ public class BbsController {
     @DeleteMapping("/{id}")
     public BbsEntity delete (@PathVariable(value = "id") Long id) {
         return bbsService.delete(id);
-    }
-    @GetMapping("/search")
-    public Page<BbsEntity> findByTitleContains(String keyword, Pageable pageable) {
-        return bbsService.findByTitleContains(keyword, pageable);
     }
 
 }

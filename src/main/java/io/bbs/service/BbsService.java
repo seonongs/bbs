@@ -25,8 +25,8 @@ public class BbsService {
         return bbsRepository.save(bbs);
     }
 
-    public Page<BbsEntity> read(Pageable pageable) {
-        return bbsRepository.findAll(pageable);
+    public Page<BbsEntity> findByTitleContains(String keyword, Pageable pageable) {
+        return bbsRepository.findByTitleContains(keyword, pageable);
     }
 
     public Optional<BbsEntity> findById(Long id) {
@@ -49,9 +49,5 @@ public class BbsService {
         BbsEntity bbs = bbsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("BBS", "id", id));
         bbsRepository.delete(bbs);
         return bbs;
-    }
-
-    public Page<BbsEntity> findByTitleContains(String keyword, Pageable pageable) {
-        return bbsRepository.findByTitleContains(keyword, pageable);
     }
 }
