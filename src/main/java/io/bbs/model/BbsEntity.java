@@ -33,6 +33,7 @@ public class BbsEntity {
         this.title = bbsResult.getTitle();
         this.content = bbsResult.getContent();
         this.writer = bbsResult.getWriter();
+        this.modifiedDate = LocalDateTime.now();
 
         return this;
 

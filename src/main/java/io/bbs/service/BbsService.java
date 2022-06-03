@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -35,13 +36,14 @@ public class BbsService {
 
     public BbsResult update(Long id, BbsResult bbsResult) {
 
-        BbsEntity bbsEntity = bbsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("등록된 글이 없습니다."));;
+        BbsEntity bbsEntity = bbsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("등록된 글이 없습니다."));
         BbsEntity saveBbs = bbsEntity.updateBbs(id, bbsResult);
 
         return BbsResult.builder()
                 .id(saveBbs.getId())
                 .title(saveBbs.getTitle())
                 .content(saveBbs.getContent())
+                .modifiedDate(LocalDateTime.now())
                 .build();
     }
 
